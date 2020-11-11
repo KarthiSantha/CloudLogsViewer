@@ -1,11 +1,14 @@
 package main
 
 import (
-	"fmt"
+	"log"
+
+	"auth/v1.0/handlers/registerHandlers"
 )
 
 func main() {
-	fmt.Printf("Hello S3Stat \n")
-	fmt.Printf("Updated main function \n")
+	registerHandlers.RegisterHandlers()
+
+	log.Print("Main Method Started")
 
 }
