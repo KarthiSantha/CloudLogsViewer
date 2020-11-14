@@ -11,7 +11,7 @@ import (
 )
 
 func init() {
-	env := flag.String("Environment", "", "a string")
+	env := flag.String("Environment", "", "Environment dev/QA/property to choose config file appropriately")
 	flag.Parse()
 	config := Service.InitializeConfig(*env)
 
