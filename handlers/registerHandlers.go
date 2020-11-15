@@ -20,17 +20,14 @@ type App struct {
 func RegisterHandlers(Port string) {
 
 	log.Print("Resitering all handlers to paths")
-	r := mux.NewRouter() //.Schemes("http").Subrouter()
-	//Define router Templates to be used
+	r := mux.NewRouter()
 	r.Use(LoggingMiddleware)
-
-	//post := r.Methods("POST").Subrouter()
 
 	authRouter := r.PathPrefix("/auth").Subrouter()
 	authRouter.HandleFunc("/signup", Signup).Methods("POST")
 	authRouter.HandleFunc("/authenticate", Authenticate).Methods("POST")
 
-	securedRouter := r.PathPrefix("/Secure").Subrouter()
+	securedRouter := r.PathPrefix("/api").Subrouter()
 	securedRouter.Use(JwtAuthMiddleware)
 
 	securedRouter.HandleFunc("/token", Token).Methods("POST")

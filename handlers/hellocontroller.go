@@ -5,12 +5,13 @@ import (
 	"net/http"
 
 	"github.com/KarthiSantha/auth/Repository"
+	"github.com/KarthiSantha/auth/model"
 	log "github.com/sirupsen/logrus"
 )
 
 func UserProfile(rw http.ResponseWriter, req *http.Request) {
 
-	email := req.Header.Get("email")
+	email := req.Header.Get(model.UserIdentifier)
 
 	userRepo := Repository.UserRepositoryMySQLImpl{}
 	u, err := userRepo.GetByEmail(email)
