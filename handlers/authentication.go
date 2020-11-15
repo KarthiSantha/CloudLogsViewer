@@ -71,5 +71,17 @@ func Authenticate(rw http.ResponseWriter, req *http.Request) {
 		return
 	}
 	log.Print("Authentication Success")
+	token, err := Service.GetJwtToken(login.Email)
+	if err != nil {
+		log.Print("Login Success Tokne Generation Failed")
+		rw.Write([]byte("Login Success Tokne Generation Failed"))
+		return
+	}
+	rw.Header().Set("Authorization", token)
 	rw.Write([]byte("Login Success"))
+}
+
+func Token(rw http.ResponseWriter, req *http.Request) {
+	log.Print("Token Refresh request has arrived ")
+
 }

@@ -27,6 +27,7 @@ func InitializeConfig(env string) model.Config {
 	configuration.DBUsername = viper.GetString("db.username")
 	configuration.DBPassword = viper.GetString("db.password")
 	configuration.DBDatabase = viper.GetString("db.database")
+	configuration.JWTSecretKey = viper.GetString("jwt.secret_key")
 
 	return configuration
 

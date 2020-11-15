@@ -11,9 +11,10 @@ import (
 )
 
 func init() {
-	env := flag.String("Environment", "", "Environment dev/QA/property to choose config file appropriately")
+	env := flag.String("env", "", "Environment dev/QA/property to choose config file appropriately")
 	flag.Parse()
 	config := Service.InitializeConfig(*env)
+	Service.JwtKey = []byte(config.JWTSecretKey)
 
 	err := repo.CreateDatabase(config)
 	if err != nil {
@@ -29,7 +30,6 @@ func init() {
 
 	Port := config.Port
 	handlers.RegisterHandlers(Port)
-
 }
 
 func main() {
