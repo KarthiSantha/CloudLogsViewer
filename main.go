@@ -11,7 +11,7 @@ import (
 )
 
 func init() {
-	env := flag.String("env", "", "Environment dev/QA/property to choose config file appropriately")
+	env := flag.String("env", "dev", "Environment dev/QA/property to choose config file appropriately")
 	flag.Parse()
 	config := Service.InitializeConfig(*env)
 	Service.JwtKey = []byte(config.JWTSecretKey)

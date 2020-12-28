@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"net/http"
-	"strings"
 
 	"github.com/KarthiSantha/auth/Service"
 	"github.com/KarthiSantha/auth/model"
@@ -22,11 +21,10 @@ func LoggingMiddleware(next http.Handler) http.Handler {
 func JwtAuthMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		log.Print("JWT Logging middle ware Starts ------>>>>>> SECURE ------->>> ")
-		reqToken := r.Header.Get(model.JwtToken)
-		splitToken := strings.Split(reqToken, "Bearer ")
-		reqToken = splitToken[1]
+		reqToken := Service.ExtractToken(r)
 
 		claims, err := Service.IsJwtTokenValid(reqToken)
+		log.Print("Claims in the token are ", claims)
 
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusUnauthorized)
